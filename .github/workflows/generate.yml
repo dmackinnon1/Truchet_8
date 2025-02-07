@@ -1,0 +1,28 @@
+name: js build
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: add permissions
+        run: "git config --global --add safe.directory /__w/Truchet_8/Truchet_8"
+      - name: git configuration
+        run: |
+          git config --global user.email "dmackinnon1@gmail.com"
+          git config --global user.name "Dan MacKinnon"
+      - name: generate diagrams and document pages
+        run: |
+          git update-index --chmod=+x ./index.js
+          node ./index.js 
+      - name: commit 
+        run: |
+          git add .
+          git commit -m 'regenerating images and diagrams github action'
+          git push
