@@ -307,7 +307,7 @@ quad.push(raw.slice());
 quad.push(raw.slice());
 quad.push(raw.slice());
 
-let fourByFour = new doc.LaTeXTabular(4,4,quad);
+let twoByTwo = new doc.LaTeXTabular(2,2,quad);
 
 let file = folderName+"/" + completed + ".gtex";
 fs.writeFile(file, raw, function(err) {
@@ -320,7 +320,7 @@ fs.writeFile(file, raw, function(err) {
 
 file = folderName+"/" + completed + "-quad.gtex";
 
-fs.writeFile(file, fourByFour.build(), function(err) {
+fs.writeFile(file, twoByTwo.build(), function(err) {
     if(err) {
         return console.log("There was an error" + err);
         console.log("exiting");
