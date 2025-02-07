@@ -286,45 +286,63 @@ try {
 	}
 
 
+let mainDoc = new doc.LaTeXDoc();
+let mainFile = 'ch1_examples.tex';
+
 truchetModule.truchet.start(0.5,8);
 
-let completed = completeSelfDualSequence("01230012");
-console.log(completed);
 
+let sequences = ["01230012"];
+for (let i=0; i<sequences.length; i++){
 
-tikz.reset();
-truchetFromSixteen(completed,truchetModule.truchet);
+	let completed = completeSelfDualSequence(sequences[i]);
+	tikz.reset();
+	truchetFromSixteen(completed,truchetModule.truchet);
+	let raw = truchetModule.truchet.tiles.latexGrid().build();
 
-//console.log(truchetModule.truchet.tiles);
+	let quad = [];
+	quad.push(raw.slice());
+	quad.push(raw.slice());
+	quad.push(raw.slice());
+	quad.push(raw.slice());
 
-let raw = truchetModule.truchet.tiles.latexGrid().build();
+	let twoByTwo = new doc.LaTeXTabular(2,2,quad);
 
-//console.log(raw);
+	let file = folderName+"/" + completed + ".gtex";
 
-let quad = [];
-quad.push(raw.slice());
-quad.push(raw.slice());
-quad.push(raw.slice());
-quad.push(raw.slice());
-
-let twoByTwo = new doc.LaTeXTabular(2,2,quad);
-
-let file = folderName+"/" + completed + ".gtex";
-fs.writeFile(file, raw, function(err) {
-    if(err) {
-        return console.log("There was an error" + err);
-        console.log("exiting");
-		process.exit(1);
-    }
+	fs.writeFile(file, raw, function(err) {
+    	if(err) {
+        	return console.log("There was an error" + err);
+        	console.log("exiting");
+			process.exit(1);
+    	}
 	});
 
-file = folderName+"/" + completed + "-quad.gtex";
+	mainDoc.addContent(new doc.RawText("% file generated at " + getTimestamp() + "\n"))
+		.addContent(new doc.RawText("\\marginnote{\\centering\\fontsize{36}{40}\\selectfont" + completed +"\\par}\n"))
+		.addContent(new doc.RawText("\\marginnote[3\\baselineskip]{\\centering\\input{" + file + "}}\n"));
 
-fs.writeFile(file, twoByTwo.build(), function(err) {
-    if(err) {
-        return console.log("There was an error" + err);
-        console.log("exiting");
-		process.exit(1);
-    }
+
+	file = folderName+"/" + completed + "-quad.gtex";
+
+	fs.writeFile(file, twoByTwo.build(), function(err) {
+    	if(err) {
+        	return console.log("There was an error" + err);
+        	console.log("exiting");
+			process.exit(1);
+    	}
 	});
 
+	mainDoc.input(file)
+		.command(",")
+		.command("newline")
+		.command("vspace","1.2cm",true);
+}
+	
+fs.writeFile(mainFile, mainDoc.build(), function(err) {
+    	if(err) {
+        	return console.log("There was an error" + err);
+        	console.log("exiting");
+			process.exit(1);
+    	}
+	});
