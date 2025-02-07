@@ -319,7 +319,7 @@ for (let i=0; i<sequences.length; i++){
 	});
 
 	mainDoc.addContent(new doc.RawText("% file generated at " + getTimestamp() + "\n"))
-		.addContent(new doc.RawText("\\marginnote{\\centering\\fontsize{36}{40}\\selectfont" + completed +"\\par}\n"))
+		.section(completed)
 		.addContent(new doc.RawText("\\marginnote[3\\baselineskip]{\\centering\\input{" + file + "}}\n"));
 
 
