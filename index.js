@@ -292,7 +292,7 @@ let mainFile = 'ch1_examples.tex';
 truchetModule.truchet.start(0.5,8);
 
 
-let sequences = ["01230012","12221121","02021021","12221000","02020101","13231331","01230123"];
+let sequences = ["01230012","12221121","02021021","12221000","02020101","13231331","01230123","11111111","00000000","22222222","12121212","01010101","31313131"];
 for (let i=0; i<sequences.length; i++){
 
 	let completed = completeSelfDualSequence(sequences[i]);
