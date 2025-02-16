@@ -125,35 +125,28 @@ constructor(topLeft, rotation=0, size=1,color="black"){
 		
 		let s = "";
 		s += topLeft.coordinateDef() + "\n";
-		//s += topRight.coordinateDef() + "\n";
+		s += topRight.coordinateDef() + "\n";
 		s += bottomRight.coordinateDef() + "\n";
-		//s += bottomLeft.coordinateDef() + "\n";
+		s += bottomLeft.coordinateDef() + "\n";
 
 		let radius = this.size;
 
-		//s+= "\\draw (A)--(B)--(C)--(D)--cycle;\n";
-
-		//\draw[fill=black] (A) rectangle (C);
-
+		s+= "\\draw (A)--(B)--(C)--(D)--cycle;\n";
 		if (this.rotation==0){
 			//s = "\\draw[opacity=1,fill=black]" +  topLeft.build() + dash + topRight.build() + dash + bottomRight.build()+"; \n";
-			//s += "\\draw[opacity=1,fill=black]" +  topRight.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
-			s += "\\draw[path picture={\\draw[fill=black] (path picture bounding box.north west) circle ("+radius+");}] (A) rectangle (C);\n";
+			s += "\\draw[opacity=1,fill=black]" +  topRight.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
 		}
 		if (this.rotation==1){
 			//s = "\\draw[opacity=1,fill=black]" +  topRight.build() + dash + bottomRight.build() + dash + bottomLeft.build()+"; \n";
-			//s += "\\draw[opacity=1,fill=black]" +  bottomRight.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
-			s += "\\draw[path picture={\\draw[fill=black] (path picture bounding box.south west) circle ("+radius+");}] (A) rectangle (C);\n";
+			s += "\\draw[opacity=1,fill=black]" +  bottomRight.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
 		}
 		if (this.rotation==2){
 			//s = "\\draw[opacity=1,fill=black]" +  bottomRight.build() + dash + bottomLeft.build()+ dash + topLeft.build() +"; \n";
-			//s += "\\draw[opacity=1,fill=black]" +  bottomLeft.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
-			s += "\\draw[path picture={\\draw[fill=black] (path picture bounding box.south east) circle ("+radius+");}] (A) rectangle (C);\n";
+			s += "\\draw[opacity=1,fill=black]" +  bottomLeft.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
 		}
 		if (this.rotation==3){
 			//s = "\\draw[opacity=1,fill=black]" +  bottomLeft.build()+ dash + topLeft.build() + dash + topRight.build() +"; \n";
-			//s += "\\draw[opacity=1,fill=black]" +  topLeft.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
-			s += "\\draw[path picture={\\draw[fill=black] (path picture bounding box.north east) circle ("+radius+");}] (A) rectangle (C);\n";
+			s += "\\draw[opacity=1,fill=black]" +  topLeft.coordinate()+" arc[start angle=0, end angle=90, radius=" + radius +"]; \n";
 		}
 		return s;
 
