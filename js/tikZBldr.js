@@ -55,7 +55,7 @@ class TikZBuilder {
 	drawTriangle(x1, y1, r=0,scale=1){
 		let topLeft = new TikZPoint(x1, y1,r);
 	   //this.components.push(new TikZRightTriangle(topLeft,r,scale));
-		this.components.push(new TiKZBlackSemiCircle(topLeft,r,scale));
+		this.components.push(new TiKZWhiteSemiCircle(topLeft,r,scale));
 	}
 
 	drawDiagonal(x1, y1, r=0,scale=1){
